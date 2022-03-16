@@ -1,0 +1,10 @@
+<p *ngFor="let tempProduct of products">
+    {{ tempProduct.name}}; {{ tempProduct.unitPrice | currency: 'USD'}}
+
+</p>
+
+
+<!-- We are accessing the products array from the components(product-list.component.ts file). tempProduct is just a random variable name
+{{ }} These are used to display the variables from the products array. The variables are in the products.ts file -->
+
+<!-- The currency pipe | will format the unitPrice to USD-->

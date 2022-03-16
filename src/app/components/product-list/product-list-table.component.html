@@ -1,0 +1,44 @@
+<table class="table">
+
+    <thead class="table-dark">
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Units in Stock</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let tempProduct of products">
+            <td class="align-middle">
+                <img src="{{ tempProduct.imageUrl }}" height="50" />  
+                <!-- imageURL is a variable from the products.ts file(it calls to the imageURL variable in our backend Java file) -->
+            </td>
+            <td class="align-middle">{{ tempProduct.name}}</td>
+            <td class="align-middle">{{ tempProduct.unitPrice | currency: 'USD'}}</td>
+            <td class="align-middle">{{ tempProduct.unitsInStock}}</td>
+        </tr>
+
+
+    </tbody>
+
+
+
+
+</table>
+
+
+
+
+
+
+
+<!-- This is the same code in the product-list.component.html file.  It doesn't use a table and just displays info on the page in a paragraph
+    
+    <p *ngFor="let tempProduct of products">
+    {{ tempProduct.name}}; {{ tempProduct.unitPrice | currency: 'USD'}}
+
+</p>
+
+-->

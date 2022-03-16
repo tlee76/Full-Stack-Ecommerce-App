@@ -1,0 +1,27 @@
+<div class="menu-sidebar-content js-scrollbar1">
+  <nav class="navbar-sidebar">
+    <ul class="list-unstyled navbar-list">
+
+
+      <li *ngFor="let tempProductCategory of productCategories"> <!--Loop over categories(productCategories array in product-category-menu.component.ts file) and build links dynamically-->
+        
+        <a routerLink="/category/{{ tempProductCategory.id }}/{{tempProductCategory.categoryName}}" routerLinkActive="active-link">{{ tempProductCategory.categoryName}}</a>
+        <!--id and categoryName are from product-category.ts / We get most of the data from product-category-menu.component.ts file-->
+        
+      </li>
+
+      <!-- Old way of doing the list. Hard coding it
+        <li> 
+        <a routerLink="/category/2" routerLinkActive="active-link"
+          >Coffee Mugs</a>
+      </li> -->
+      <!-- <li>
+          <a routerLink="/category/3" routerLinkActive="active-link">Mouse Pads</a>
+        </li>
+        <li>
+          <a routerLink="/category/4" routerLinkActive="active-link">Luggage Tags</a>
+        </li> -->
+      <!-- The param name is id. So we pass the value of '1' for this parameter. routerLinkActive is just for css style being applied after user clicks it-->
+    </ul>
+  </nav>
+</div>
