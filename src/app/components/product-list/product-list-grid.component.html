@@ -37,6 +37,50 @@
                 <!--the *ngIf statment is saying: if(products is null/undefined) or (products.length == 0), then display "No products found"-->
 
             </div>
+
+
+            <!--Begin footer section-->
+            <div class="footer-pagination">
+                <div class="row">
+                    <div class="col-md-6"></div>
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-9" style="padding-left: 30%;">
+                                <ngb-pagination [(page)]="thePageNumber"
+                                                [pageSize]="thePageSize"
+                                                [collectionSize]="theTotalElements"
+                                                [maxSize]="5"
+                                                [boundaryLinks]="true"
+                                                (pageChange)="listProducts()">
+                                                <!--Left side are parameters of ngb-pagination component. Right side are properties of ProductListComponent ts class. pageChange is a event-binding event, when user clicks a different page, listproducts method will be called -->
+
+                                </ngb-pagination>
+                            </div>
+
+                            <div class="col-md-3 mt-2" style="text-align: right"> <!--Drop down list for page size-->
+                                <span class="mr-2">Page Size</span>
+
+                                <select #mySelect (change)="updatePageSize(+mySelect.value)"> <!--event binding on (change)event-->
+                                    <option>2</option>
+                                    <option selected="true">5</option>
+                                    <option>10</option>
+                                    <option>25</option>
+                                    <option>50</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!--End footer section-->
+
+
         </div>
     </div>
 

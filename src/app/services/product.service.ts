@@ -31,13 +31,13 @@ export class ProductService {
   }
 
 
-  getProductListPaginate(thePage: number, thePageSize: number, theCategoryId: number ): Observable<GetResponseProducts> {  // new method we wrote.  Returns an observable of Product and then Maps the JSON Data from Spring DataRest to Product Array
+  getProductListPaginate(thePage: number, thePageSize: number, theCategoryId: number ): Observable<GetResponseProducts> { 
 
     // need to build URL based on category id, page and page size in backend.
       const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`
                         + `&page=${thePage}&size=${thePageSize}`; //theCategoryId is the parameter passed into this method
   
-      return this.httpClient.get<GetResponseProducts>(searchUrl); 
+      return this.httpClient.get<GetResponseProducts>(searchUrl); //return GetResponseProducts and pass in searchUrl
      
     }
 
@@ -62,6 +62,19 @@ export class ProductService {
 
     return this.getProducts(searchUrl); //calling getProducts method below. Did it this way to clean up code (called refactoring code)
   }
+
+
+
+  searchProductsPaginate(thePage: number, thePageSize: number, theKeyword: string ): Observable<GetResponseProducts> { 
+
+    // need to build URL based on keyword, page and page size in backend.
+      const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`
+                        + `&page=${thePage}&size=${thePageSize}`; //theCategoryId is the parameter passed into this method
+  
+      return this.httpClient.get<GetResponseProducts>(searchUrl); //return GetResponseProducts and pass in searchUrl
+     
+    }
+
 
 
   private getProducts(searchUrl: string): Observable<Product[]> { //basic call to backend REST api

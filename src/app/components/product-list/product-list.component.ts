@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Agent } from 'http';
 import { Product } from 'src/app/common/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -21,8 +20,10 @@ export class ProductListComponent implements OnInit {
 
   // new properties for pagination
   thePageNumber: number = 1;
-  thePageSize: number = 10;
+  thePageSize: number = 5;
   theTotalElements: number = 0;
+
+  previousKeyword: string = null;
   
 
 
@@ -62,12 +63,17 @@ export class ProductListComponent implements OnInit {
     
     const theKeyword: string = this.route.snapshot.paramMap.get('keyword'); //getting the search keyword/value the user passed in
 
+    //if we have a diff keyword than previous, then set thePageNumber to 1
+    if(this.previousKeyword != theKeyword){
+      this.thePageNumber = 1;
+    }
+
+    this.previousKeyword = theKeyword;
+    console.log(`keyword=${theKeyword}, thePageNumber=${this.thePageNumber}`);
+
     // now search for the products using the keyword/value
-    this.productService.searchProducts(theKeyword).subscribe( //calling productService above in constructor. Then using searchProducts method in product.service.ts class
-      data => {
-        this.products = data;
-      }
-    )
+    this.productService.searchProductsPaginate(this.thePageNumber - 1, this.thePageSize, theKeyword).subscribe( //calling productService above in constructor. Then using searchProductsPaginate method in product.service.ts class
+      this.processResult());
 
   }
 
@@ -99,7 +105,7 @@ export class ProductListComponent implements OnInit {
     // Note: Angular will reuse a component if it is currently being viewed
     //
 
-    // if we have a different category id than previous, then set thePageNumber back to 1
+    // if we have a different category id than the previous, then set thePageNumber back to 1
     if (this.previousCategoryId != this.currentCategoryId) {
       this.thePageNumber = 1;
     }
@@ -116,6 +122,8 @@ export class ProductListComponent implements OnInit {
   }     // Assign results to Product array.  Integrating our Angular service with our Angular component
 
   
+
+
     processResult() { // Map data from JSON response to the properties here for this class
       return data => {
         this.products = data._embedded.products;
@@ -125,6 +133,12 @@ export class ProductListComponent implements OnInit {
       } //left hand side are properties defined in this class. right hand side is data from spring data REST JSON
     }
 
+
+    updatePageSize(pageSize: number){
+      this.thePageSize = pageSize;
+      this.thePageNumber = 1;
+      this.listProducts(); // this will refresh the page after choosing the page size
+    }
 
 
 
