@@ -30,12 +30,10 @@
 
           <app-search></app-search>
 
-          <div class="cart-area d-n">
-            <a href="shopping-detail.html">
-              <div class="total">19.22 <span> 2</span> </div> <i class="fa fa-shopping-cart"
-                aria-hidden="true"></i>
-            </a>
-          </div>
+
+          <app-cart-status></app-cart-status>
+
+          
         </div>
         <div class="account-wrap"></div>
       </div>
@@ -47,7 +45,7 @@
 
   <!-- MAIN CONTENT-->
 <!-- Define the Router Outlet -->
-<router-outlet></router-outlet> <!--Router outlet acts as a placeholder. It Renders the desired componenet based on the route, here at this location -->
+<router-outlet></router-outlet> <!--Router outlet acts as a placeholder. It Renders thedes ired component based on the route (routes in app.module.ts), here at this location -->
 
   <!-- <app-product-list></app-product-list> Component that we created earlier, old way -->
 
